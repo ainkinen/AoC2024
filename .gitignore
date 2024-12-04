@@ -1,0 +1,7 @@
+/target
+
+# IntelliJ
+.idea/
+
+# Daily input files
+input/
