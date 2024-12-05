@@ -12,7 +12,7 @@ mod day_1;
 // mod day_17;
 // mod day_18;
 // mod day_19;
-// mod day_2;
+mod day_2;
 // mod day_20;
 // mod day_21;
 // mod day_22;
