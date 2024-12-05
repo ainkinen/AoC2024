@@ -20,7 +20,7 @@ mod day_2;
 // mod day_24;
 // mod day_25;
 mod day_3;
-// mod day_4;
+mod day_4;
 // mod day_5;
 // mod day_6;
 // mod day_7;
