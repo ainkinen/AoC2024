@@ -81,8 +81,7 @@ fn print_visited(input: &Input, visited: &HashSet<Coord>) {
     }
 }
 
-#[aoc(day6, part1)]
-fn part1(input: &Input) -> usize {
+fn get_path(input: &Input) -> HashSet<Coord> {
     let mut guard_at = input.starting_point;
     let mut guard_direction = Direction::UP;
 
@@ -94,7 +93,7 @@ fn part1(input: &Input) -> usize {
         let next = step(&guard_at, &guard_direction);
         if !in_bounds(&next, input.side) {
             // guard stepped out
-            break;
+            return visited;
         }
 
         if input.obstacles.contains(&next) {
@@ -105,9 +104,12 @@ fn part1(input: &Input) -> usize {
             guard_at = next;
         }
     }
+}
 
+#[aoc(day6, part1)]
+fn part1(input: &Input) -> usize {
+    let visited = get_path(input);
     // print_visited(input, &visited);
-
     visited.len()
 }
 
@@ -140,7 +142,8 @@ fn does_loop(starting_point: &Coord, obstacles: &HashSet<Coord>, side: i32) -> b
     }
 }
 
-#[aoc(day6, part2)]
+// #[aoc(day6, part2, slow)]
+#[allow(dead_code)]
 fn part2(input: &Input) -> i32 {
     let mut loop_causing_obstacles: HashSet<Coord> = HashSet::new();
 
@@ -168,6 +171,33 @@ fn part2(input: &Input) -> i32 {
     loop_causing_obstacles.len() as i32
 }
 
+#[aoc(day6, part2, faster)]
+fn part2_faster(input: &Input) -> i32 {
+    let mut loop_causing_obstacles: HashSet<Coord> = HashSet::new();
+
+    // The added obstacle must be along the original path. Otherwise, the guard would not hit it.
+    let orig_path = get_path(input);
+    for p in orig_path {
+        let new_obstacle = p;
+
+        if input.obstacles.contains(&new_obstacle) || new_obstacle == input.starting_point {
+            // not a valid location
+            continue;
+        }
+
+        let mutated_obstacles = {
+            let mut set = input.obstacles.clone();
+            set.insert(new_obstacle);
+            set
+        };
+
+        if does_loop(&input.starting_point, &mutated_obstacles, input.side) {
+            loop_causing_obstacles.insert(new_obstacle);
+        }
+    }
+    loop_causing_obstacles.len() as i32
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -192,5 +222,10 @@ mod tests {
     #[test]
     fn test_part2() {
         assert_eq!(part2(&parse_input(TEST_INPUT)), 6);
+    }
+
+    #[test]
+    fn test_part2_faster() {
+        assert_eq!(part2_faster(&parse_input(TEST_INPUT)), 6);
     }
 }
