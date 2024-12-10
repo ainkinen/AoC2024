@@ -12,27 +12,27 @@ struct Input {
 
 #[derive(Debug, Clone, Copy, Hash, Eq, PartialEq)]
 enum Direction {
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT,
+    Up,
+    Down,
+    Left,
+    Right,
 }
 
 fn step(p: &Coord, dir: &Direction) -> Coord {
     match dir {
-        Direction::UP => (p.0 - 1, p.1),
-        Direction::RIGHT => (p.0, p.1 + 1),
-        Direction::DOWN => (p.0 + 1, p.1),
-        Direction::LEFT => (p.0, p.1 - 1),
+        Direction::Up => (p.0 - 1, p.1),
+        Direction::Right => (p.0, p.1 + 1),
+        Direction::Down => (p.0 + 1, p.1),
+        Direction::Left => (p.0, p.1 - 1),
     }
 }
 
 fn turn(dir: &Direction) -> Direction {
     match dir {
-        Direction::UP => Direction::RIGHT,
-        Direction::RIGHT => Direction::DOWN,
-        Direction::DOWN => Direction::LEFT,
-        Direction::LEFT => Direction::UP,
+        Direction::Up => Direction::Right,
+        Direction::Right => Direction::Down,
+        Direction::Down => Direction::Left,
+        Direction::Left => Direction::Up,
     }
 }
 
@@ -83,7 +83,7 @@ fn print_visited(input: &Input, visited: &HashSet<Coord>) {
 
 fn get_path(input: &Input) -> HashSet<Coord> {
     let mut guard_at = input.starting_point;
-    let mut guard_direction = Direction::UP;
+    let mut guard_direction = Direction::Up;
 
     let mut visited: HashSet<Coord> = HashSet::new();
 
@@ -114,8 +114,8 @@ fn part1(input: &Input) -> usize {
 }
 
 fn does_loop(starting_point: &Coord, obstacles: &HashSet<Coord>, side: i32) -> bool {
-    let mut guard_at = starting_point.clone();
-    let mut guard_direction = Direction::UP;
+    let mut guard_at = *starting_point;
+    let mut guard_direction = Direction::Up;
 
     let mut visited: HashSet<(Coord, Direction)> = HashSet::new();
 

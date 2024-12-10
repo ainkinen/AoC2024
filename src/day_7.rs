@@ -86,7 +86,7 @@ fn part1(input: &[Equation]) -> i64 {
 }
 
 #[aoc(day7, part2)]
-fn part2(input: &Vec<Equation>) -> i64 {
+fn part2(input: &[Equation]) -> i64 {
     input
         .iter()
         .filter(|eq| is_possible_with_concat(eq))
@@ -95,7 +95,7 @@ fn part2(input: &Vec<Equation>) -> i64 {
 }
 
 #[aoc(day7, part2, faster)]
-fn part2_faster(input: &Vec<Equation>) -> i64 {
+fn part2_faster(input: &[Equation]) -> i64 {
     input
         .iter()
         .filter(|eq| is_possible_with_concat_faster(eq))

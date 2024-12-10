@@ -121,7 +121,7 @@ fn part2(grid: &Grid) -> i32 {
                         get_grid_char(grid, &coord[0]) == Some('M')
                             && get_grid_char(grid, &coord[1]) == Some('M')
                             && get_grid_char(grid, &coord[2]) == Some('S')
-                            && get_grid_char(grid, &&coord[3]) == Some('S')
+                            && get_grid_char(grid, &coord[3]) == Some('S')
                     }) {
                         count += 1
                     }

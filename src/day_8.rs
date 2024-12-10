@@ -135,7 +135,7 @@ mod tests {
 
     #[test]
     fn test_parse_input() {
-        let parsed = parse_input(&TEST_INPUT);
+        let parsed = parse_input(TEST_INPUT);
 
         assert_eq!(
             parsed.antenna_groups,
