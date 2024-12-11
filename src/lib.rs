@@ -3,7 +3,7 @@ use aoc_runner_derive::aoc_lib;
 // mod day_x;
 mod day_1;
 mod day_10;
-// mod day_11;
+mod day_11;
 // mod day_12;
 // mod day_13;
 // mod day_14;
